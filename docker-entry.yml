@@ -1,0 +1,16 @@
+#!/bin/bash
+# 执行错误就退出
+set -e
+
+# 定义
+# 不可变变量
+# butterfly地址
+readonly GITHUB_URL="https://github.com/jerryc127/hexo-theme-butterfly.git"
+readonly GITEE_URL="https://gitee.com/immyw/hexo-theme-butterfly.git"
+readonly ARGS=""
+# 可变变量
+DEFAUT_URL=${GITEE_URL}
+BRANCH_NAME="master"
+
+
+
