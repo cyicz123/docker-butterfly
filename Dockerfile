@@ -9,4 +9,5 @@ RUN	apt-get update && \
 	apt-get autoclean -y && \
 	rm -rf /var/lib/apt/lists/*
 WORKDIR	/root/blog
-
+COPY	docker-entry.sh /root/
+ENTRYPOINT	["/bin/sh", "/root/docker-entry.sh"]
