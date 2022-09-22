@@ -1,7 +1,9 @@
 #!/bin/bash
+set -e
 
 if [ -z "$WORKDIR" ]
 then
+    echo "WORKDIR set /root/blog"
     WORKDIR="/root/blog"
 fi
 
@@ -18,46 +20,59 @@ helpInfo(){
 }
 
 genGitIgnore(){
-    echo '*' > .gitignore
-    echo '!source/**' >> .gitignore
-    echo '!scaffolds/**' >> .gitignore
-    echo '!package.json' >> .gitignore
-    echo '!package-lock.json' >> .gitignore
-    echo '!_config.yml' >> .gitignore
-    echo '!_config.butterfly.yml' >> .gitignore
-    echo '!.gitignore' >> .gitignore
-    echo '!deploy.sh' >> .gitignore
-    echo '!.npmignore' >> .gitignore
+    echo '/node_modules' > .gitignore
+    echo '/themes' >> .gitignore
+    echo '/public' >> .gitignore
+    echo '/.github' >> .gitignore
+    echo 'db.json' >> .gitignore
 }
 
 initBlog(){
+    echo "cd ${WORKDIR}"
     cd ${WORKDIR}
+
+    echo "rm -rf ${WORKDIR}"
+    rm -rf *
+
+    echo "hexo init"
     hexo init .
+    echo "git init"
     git init .
+    echo "Generate .gitignore"
     genGitIgnore
-    npm install hexo-theme-butterfly hexo-renderer-pug hexo-renderer-stylus hexo-wordcount --save
+    cnpm install hexo-theme-butterfly hexo-renderer-pug hexo-renderer-stylus hexo-wordcount --save
     cp node_modules/hexo-theme-butterfly/_config.yml _config.butterfly.yml
     sed -i 's/^theme: .*/theme: butterfly/g' _config.yml
     echo "Init blog successful!"
 }
 
 recoveryBlog(){
-    echo "recoveryBlog"
+    echo "cd ${WORKDIR}"
+    cd ${WORKDIR}
+
+    if [ "$1" != '.' ]
+    then
+    	echo "rm -rf ${WORKDIR}"
+    	rm -rf *
+	echo "git clone $1 ."
+        git clone $1 .
+    fi
+    cnpm install
 }
 
 #-o或--options选项后面接可接受的短选项，如ab:c::，表示可接受的短选项为-a -b -c，其中-a选项不接参数，-b选项后必须接参数，-c选项的参数为可选的
 #-l或--long选项后面接可接受的长选项，用逗号分开，冒号的意义同短选项。
 #-n选项后接选项解析错误时提示的脚本名字
-ARGS=`getopt -o ir::h --long init,recovery::,help -n "$0" -- "$@"`
+ARGS=`getopt -o ir:h --long init,recovery:,help -n "$0" -- "$@"`
 if [ $? != 0 ]; then
     helpInfo
     exit 1
 fi
 
-#echo $ARGS
 #将规范化后的命令行参数分配至位置参数（$1,$2,...)
 eval set -- "${ARGS}"
-alias npm='cnpm'
+echo alias npm='cnpm' >> /root/.zshrc
+
 while true
 do
     case "$1" in

@@ -1,0 +1,26 @@
+version: '3.3'
+services:
+    butterfly:
+        container_name: blog
+        volumes:
+            - '~/.gitconfig:/root/.gitconfig:ro'
+            - '~/.ssh:/root/.ssh:ro'
+            - './blog_bak:/root/blog'
+        ports:
+            - '4000:4000'
+        image: 'cyicz123/butterfly:4.4.0'
+        command: 
+            # 取消注释，选择对应的模式
+
+            # blog_bak文件夹里已经存在hexo博客文件，直接恢复
+            - '--recovery'
+            - '.'
+
+            # blog_bak文件夹为空，从url中拉取文件，然后恢复
+            # - '--recovery'
+            # - '个人仓库url'
+            
+            # blog_bak文件夹为空，新建一个hexo网站
+            # - '--init'
+            
+
