@@ -13,14 +13,14 @@ services:
             # 取消注释，选择对应的模式
 
             # blog_bak文件夹里已经存在hexo博客文件，直接恢复
-            - '--recovery'
-            - '.'
+            # - '--recovery'
+            # - '.'
 
             # blog_bak文件夹为空，从url中拉取文件，然后恢复
             # - '--recovery'
             # - '个人仓库url'
             
             # blog_bak文件夹为空，新建一个hexo网站
-            # - '--init'
+            - '--init'
             
 
