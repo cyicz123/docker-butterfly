@@ -1,4 +1,15 @@
-基于hexo的butterfly主题封装的docker镜像，同时增加了oh-my-zsh、vim和git方便编辑和部署。
+![master version](https://img.shields.io/github/package-json/v/jerryc127/hexo-theme-butterfly/master?color=%231ab1ad&label=master)![https://img.shields.io/npm/v/hexo-theme-butterfly?color=%09%23bf00ff](https://img.shields.io/npm/v/hexo-theme-butterfly?color=%09%23bf00ff)
+![hexo version](https://img.shields.io/badge/hexo-5.3.0+-0e83c)
+![license](https://img.shields.io/github/license/jerryc127/hexo-theme-butterfly?color=FF5531)
+
+![](https://cdn.jsdelivr.net/gh/jerryc127/CDN@m2/img/theme-butterfly-readme.png)
+
+预览: 👍 [Butterfly](https://butterfly.js.org/)  ||  🤞 [CrazyWong](https://crazywong.com/)
+
+文档: 📖 [Butterfly Docs](https://butterfly.js.org/posts/21cfbf15/)
+>
+> 一款基于hexo的butterfly主题封装的docker镜像，同时增加了oh-my-zsh、vim和git方便编辑和部署。[Butterfly Github](https://github.com/jerryc127/hexo-theme-butterfly)
+>
 ## 一、准备
 ### 1. 配置本地git账号
 无论是初始化一个新的博客网站，还是从已有文件里恢复，本镜像的启动脚本都需要git的账号信息。所以请用如下命令，查看是否有输出：
